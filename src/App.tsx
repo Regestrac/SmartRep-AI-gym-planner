@@ -7,11 +7,11 @@ import Auth from "./pages/Auth"
 import Navbar from "./components/layout/Navbar"
 import { NeonAuthUIProvider } from '@neondatabase/neon-js/auth/react';
 import { authClient } from './lib/auth';
-import AuthProvider from "./context/authContext"
+import AuthProvider from "./context/AuthContext"
 
 function App() {
   return (
-    <NeonAuthUIProvider authClient={authClient as any}>
+    <NeonAuthUIProvider authClient={authClient as any} defaultTheme="dark">
       <AuthProvider>
         <BrowserRouter>
           <div className="main-h-screen flex flex-col">

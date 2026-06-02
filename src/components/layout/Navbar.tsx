@@ -1,7 +1,8 @@
 // import { Dumbbell } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import Button from '../ui/Button'
-import { useAuth } from '../../context/authContext'
+import { useAuth } from '../../context/AuthContext'
+import { UserButton } from '@neondatabase/neon-js/auth/react';
 
 const Navbar = () => {
   const { user } = useAuth();
@@ -20,6 +21,7 @@ const Navbar = () => {
             <Link to="/profile">
                 <Button size='sm' variant='ghost'>My Plan</Button>
               </Link>
+              <UserButton className='bg-accent' />
             </>
           ) : (
             <>
