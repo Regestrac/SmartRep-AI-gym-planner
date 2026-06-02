@@ -7,6 +7,7 @@ import { Textarea } from "../components/ui/Textarea";
 import Button from "../components/ui/Button";
 import { ArrowRight } from "lucide-react";
 import { daysOptions, equipmentOptions, experienceOptions, goalOptions, sessionOptions, splitOptions } from "../helpers/constants";
+import type { UserProfile } from "../helpers/types";
 
 type FormDataType = {
   goal: string;
@@ -19,7 +20,7 @@ type FormDataType = {
 };
 
 const Onboarding = () => {
-  const { user } = useAuth();
+  const { user, saveProfile } = useAuth();
 
   const [formData, setFormData] = useState<FormDataType>({
     goal: "bulk",
@@ -37,7 +38,18 @@ const Onboarding = () => {
 
   const handleQuestionnaire = async (e: React.SubmitEvent) => {
     e.preventDefault();
-    
+
+    const payload: Omit<UserProfile, "userId" | "updatedAt"> = {
+      goal: formData.goal as UserProfile["goal"],
+      experience: formData.experience as UserProfile["experience"],
+      daysPerWeek: parseInt(formData.daysPerWeek),
+      sessionLength: parseInt(formData.sessionLength),
+      equipment: formData.equipment as UserProfile["equipment"],
+      injuries: formData.injuries || undefined,
+      preferredSplit: formData.preferredSplit as UserProfile["preferredSplit"],
+    };
+
+    saveProfile(payload)
   }
 
   if (!user) {
