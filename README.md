@@ -2,7 +2,7 @@
 
 An AI-powered workout plan generator that creates personalized training programs tailored to your fitness goals, experience level, schedule, and available equipment.
 
-Built with React, Express, and Neon (PostgreSQL + Auth), using OpenRouter to generate structured weekly training plans via LLM.
+Built with React, Express, and Neon (PostgreSQL + Auth), using OpenRouter to generate structured weekly training plans via LLM. Authentication and account management are powered by Neon Auth's pre-built UI components (`AuthView` and `AccountView`), providing a seamless sign-up/sign-in flow and a dedicated account settings page.
 
 ---
 
@@ -124,6 +124,20 @@ Built with React, Express, and Neon (PostgreSQL + Auth), using OpenRouter to gen
 ├── vite.config.ts
 └── tsconfig*.json
 ```
+
+---
+
+## Major Architecture Decisions
+
+- **Neon Auth over custom auth** — Authentication is fully delegated to Neon Auth's pre-built UI components (`AuthView`, `AccountView`) instead of rolling a custom auth system. This eliminates the need to manage password hashing, session tokens, or email verification flows. The `Account` page uses `AccountView` directly, giving users a ready-made settings page for profile and security management with zero backend code.
+
+- **Monorepo with separate `/server` directory** — The backend lives in a distinct `server/` directory with its own `package.json` and `tsconfig`, keeping concerns cleanly separated. This avoids tight coupling between frontend and backend dependencies and makes it easy to deploy them independently (e.g., frontend on Vercel/Netlify, backend on Railway/Render).
+
+- **Single AI model with structured JSON output** — The app uses one OpenRouter LLM (`nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free`) with a carefully engineered prompt that requests a strict JSON schema. The response is validated and parsed before being stored as JSONB, ensuring the frontend can render plans without worrying about markdown or free-text variability.
+
+- **Versioned plans via Prisma** — The `training_plans` table uses a `version` integer field rather than deleting and replacing old plans. This allows users to regenerate plans and preserves history, though only the latest plan is surfaced in the UI.
+
+- **Dark theme by default** — The entire UI uses a custom dark palette (black backgrounds, lime green accent `#a3e635`, zinc grays). The Neon Auth components are also themed via `@neondatabase/neon-js/ui/tailwind` for visual consistency without custom auth UI work.
 
 ---
 
