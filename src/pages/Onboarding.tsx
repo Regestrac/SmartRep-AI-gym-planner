@@ -8,6 +8,7 @@ import Button from "../components/ui/Button";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { daysOptions, equipmentOptions, experienceOptions, goalOptions, sessionOptions, splitOptions } from "../helpers/constants";
 import type { UserProfile } from "../helpers/types";
+import { useNavigate } from "react-router-dom";
 
 type FormDataType = {
   goal: string;
@@ -20,7 +21,7 @@ type FormDataType = {
 };
 
 const Onboarding = () => {
-  const { user, saveProfile } = useAuth();
+  const { user, saveProfile, generatePlan } = useAuth();
 
   const [formData, setFormData] = useState<FormDataType>({
     goal: "bulk",
@@ -33,6 +34,8 @@ const Onboarding = () => {
   });
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+
+  const navigate = useNavigate();
 
   const updateForm = (field: keyof FormDataType, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -54,6 +57,8 @@ const Onboarding = () => {
     try {
       saveProfile(payload);
       setIsGenerating(true);
+      await generatePlan();
+      navigate("/profile");
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to save profile');
     } finally {
