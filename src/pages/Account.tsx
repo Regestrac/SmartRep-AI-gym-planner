@@ -1,9 +1,16 @@
-import React from 'react'
+import { AccountView } from "@neondatabase/neon-js/auth/react";
+import { useParams } from "react-router-dom";
 
 const Account = () => {
-  return (
-    <div>Account</div>
-  )
-}
+  const { pathname } = useParams();
 
-export default Account
+  return (
+    <div className="min-h-screen pt-24 pb-12 px-6">
+      <div className="max-w-4xl mx-auto">
+        <AccountView pathname={pathname} />
+      </div>
+    </div>
+  )
+};
+
+export default Account;
