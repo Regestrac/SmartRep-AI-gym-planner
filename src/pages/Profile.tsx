@@ -1,9 +1,9 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import Button from "../components/ui/Button";
-import { Calendar, Dumbbell, RefreshCcw, Target, TrendingUp } from "lucide-react";
+import { Calendar, Dumbbell, Target, TrendingUp } from "lucide-react";
 import Card from "../components/ui/Card";
 import PlanDisplay from "../components/plan/PlanDisplay";
+import RegeneratePlan from "../components/plan/RegeneratePlan";
 
 const formatDate = (dateString: string) => {
   return new Date(dateString).toLocaleDateString("en-US", {
@@ -16,7 +16,7 @@ const formatDate = (dateString: string) => {
 };
 
 const Profile = () => {
-  const { user, isLoading, plan, generatePlan } = useAuth();
+  const { user, isLoading, plan } = useAuth();
 
   if (!user && !isLoading) {
     return <Navigate to="/auth/sign-in" replace />
@@ -37,14 +37,7 @@ const Profile = () => {
             </p>
           </div>
 
-          <Button
-            variant="secondary"
-            className="gap-2"
-            onClick={async () => await generatePlan()}
-          >
-            <RefreshCcw className="w-4 h-4" />
-            Regenerate Plan
-          </Button>
+          <RegeneratePlan position="top" />
         </div>
 
         <div className="grid md:grid-cols-4 gap-4 mb-8">
@@ -104,6 +97,8 @@ const Profile = () => {
             {plan.progression}
           </p>
         </Card>
+
+        <RegeneratePlan position="bottom" />
 
       </div>
     </div>
