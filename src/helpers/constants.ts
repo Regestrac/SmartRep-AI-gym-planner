@@ -1,3 +1,5 @@
+import { Calendar, Clock, Sparkles, Target } from "lucide-react";
+
 export const goalOptions = [
   { value: "bulk", label: "Build Muscle (Bulk)" },
   { value: "cut", label: "Lose Fat (Cut)" },
@@ -38,4 +40,27 @@ export const splitOptions = [
   { value: "upper_lower", label: "Upper/Lower Split" },
   { value: "ppl", label: "Push/Pull/Legs" },
   { value: "custom", label: "Let AI Decide" },
+];
+
+export const features = [
+  {
+    icon: Sparkles,
+    title: "AI-Powered Plans",
+    description: "Get a training program tailored to your goals, experience, and schedule.",
+  },
+  {
+    icon: Target,
+    title: "Goal-Oriented",
+    description: "Whether you want to build muscle, lose fat, or get stronger — we optimize for your goal.",
+  },
+  {
+    icon: Calendar,
+    title: "Flexible Scheduling",
+    description: "Plans that fit your lifestyle. Train 2 days or 6 — we adapt to you.",
+  },
+  {
+    icon: Clock,
+    title: "Time-Efficient",
+    description: "Every workout is designed to maximize results in your available time.",
+  },
 ];

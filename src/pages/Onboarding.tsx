@@ -33,7 +33,6 @@ const Onboarding = () => {
     preferredSplit: "upper_lower",
   });
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
 
   const navigate = useNavigate();
 
@@ -60,7 +59,6 @@ const Onboarding = () => {
       await generatePlan();
       navigate("/profile");
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to save profile');
     } finally {
       setIsGenerating(false);
     }
