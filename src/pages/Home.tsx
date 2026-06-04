@@ -41,13 +41,13 @@ const Home = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/onboarding">
+            <Link to="/auth/sign-up">
               <Button size="lg" className="gap-2">
                 Get Started Free
                 <ArrowRight className="w-5 h-5" />
               </Button>
             </Link>
-            <Link to="/onboarding">
+            <Link to="/auth/sign-in">
               <Button variant="secondary" size="lg">
                 Sign In
               </Button>
