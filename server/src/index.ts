@@ -2,8 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
-import { profileRouter } from './routes/profile';
-import { planRouter } from './routes/plan';
+import { planRouter } from './routes/plan.js';
+import { profileRouter } from './routes/profile.js';
 
 dotenv.config();
 

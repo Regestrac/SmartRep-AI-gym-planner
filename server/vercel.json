@@ -1,15 +1,9 @@
 {
   "version": 2,
-  "buildCommand": "npx prisma generate",
-  "functions": {
-    "api/index.ts": {
-      "runtime": "@vercel/node@5.8.12"
-    }
-  },
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/api/index.ts"
+      "dest": "api/index.js"
     }
   ]
 }
